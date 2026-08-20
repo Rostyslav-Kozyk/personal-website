@@ -1,0 +1,78 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import BaseLayout from "./BaseLayout.astro";
+import TagLink from "../components/article/TagLink.astro";
+import CodeEnhancements from "../components/article/CodeEnhancements.astro";
+
+import { formatDate } from "../utils/dates";
+
+interface Props {
+    article: CollectionEntry<"articles">;
+    readingTime: number;
+}
+
+const { article, readingTime } = Astro.props;
+
+const publishedAt = formatDate(article.data.publishedAt);
+---
+
+<BaseLayout
+    title={`${article.data.title} | Rostyslav Kozyk`}
+    description={article.data.description}
+    type="article"
+>
+    <main class="mx-auto max-w-3xl px-6 py-16 sm:py-20">
+        <header class="mb-12">
+            <a href="/articles" class="text-sm font-medium hover:underline">
+                ← All articles
+            </a>
+
+            <div
+                class="mt-8 flex flex-wrap items-center gap-3 text-sm text-text-secondary"
+            >
+                <time datetime={article.data.publishedAt.toISOString()}>
+                    {publishedAt}
+                </time>
+
+                <span aria-hidden="true"> · </span>
+
+                <span>
+                    {readingTime} min read
+                </span>
+            </div>
+
+            <h1 class="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
+                {article.data.title}
+            </h1>
+
+            <p class="mt-5 text-xl leading-relaxed">
+                {article.data.description}
+            </p>
+
+            <div class="mt-6 flex flex-wrap gap-2">
+                {article.data.tags.map((tag) => <TagLink tag={tag} />)}
+            </div>
+        </header>
+
+        <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_220px]">
+            <div class="min-w-0">
+                <slot name="before-content" />
+
+                <article class="prose max-w-none dark:prose-invert">
+                    <slot />
+                </article>
+
+                <slot name="after-content" />
+            </div>
+
+            <aside class="hidden lg:block">
+                <div class="sticky top-8">
+                    <slot name="sidebar" />
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <CodeEnhancements />
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+title: "Why I Use the Page Object Model"
+description: "Why I chose the Page Object Model for my Selenium test automation framework."
+
+publishedAt: 2026-08-13
+
+tags:
+  - Selenium
+  - Java
+  - Architecture
+
+draft: false
+
+project: test-automation-framework
+---
+
+One of the architectural decisions in my UI automation framework
+was to separate page interactions from test scenarios.
+
+## The Problem
+
+UI tests can quickly become difficult to maintain when Selenium
+selectors and interaction logic are placed directly inside test methods.
+
+## The Idea
+
+The Page Object Model moves page-specific behavior into dedicated classes.
+
+This allows test scenarios to focus on business behavior instead of
+low-level browser interactions.
+
+## Trade-offs
+
+The Page Object Model improves separation of responsibilities,
+but it also introduces additional abstraction.
+
+In this article I will explore when this abstraction is useful
+and when it can become unnecessary complexity.

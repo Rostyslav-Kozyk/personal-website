@@ -1,0 +1,61 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+---
+
+<section class="border-t border-border-default py-16 sm:py-20">
+  <header class="mb-8">
+    <p class="text-sm font-semibold uppercase tracking-wider">
+      Featured Project
+    </p>
+
+    <h2 class="mt-2 text-3xl font-bold tracking-tight">Selected Work</h2>
+  </header>
+
+  <article
+    class="rounded-2xl border border-border-default bg-surface p-6 sm:p-8"
+  >
+    <div class="flex flex-wrap gap-2">
+      {
+        project.data.technologies.map((technology) => (
+          <span class="rounded-md border border-border-default px-2 py-1 text-xs font-medium">
+            {technology}
+          </span>
+        ))
+      }
+    </div>
+
+    <h3 class="mt-6 text-3xl font-semibold tracking-tight">
+      <a href={`/projects/${project.id}`} class="hover:underline">
+        {project.data.title}
+      </a>
+    </h3>
+
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed">
+      {project.data.description}
+    </p>
+
+    <div class="mt-7 flex flex-wrap gap-4">
+      <a
+        href={`/projects/${project.id}`}
+        class="rounded-lg border border-border-default px-4 py-2 text-sm font-semibold transition-colors hover:bg-surface-hover"
+      >
+        Explore project
+      </a>
+
+      <a
+        href={project.data.github}
+        target="_blank"
+        rel="noreferrer"
+        class="rounded-lg border border-border-default px-4 py-2 text-sm font-semibold transition-colors hover:bg-surface-hover"
+      >
+        View on GitHub
+      </a>
+    </div>
+  </article>
+</section>

@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleCard from "../../components/article/ArticleCard.astro";
+import TagList from "../../components/article/TagList.astro";
+
+import { getPublishedArticles, getTags } from "../../utils/content";
+
+const articles = await getPublishedArticles();
+const tags = await getTags();
+---
+
+<BaseLayout
+    title="Articles | Rostyslav Kozyk"
+    description="Articles about software engineering, testing and architecture."
+>
+    <main class="mx-auto max-w-5xl px-6 py-16 sm:py-20">
+        <header class="mb-12">
+            <p class="mb-3 text-sm font-semibold uppercase tracking-wider">
+                Knowledge Base
+            </p>
+
+            <h1 class="text-4xl font-bold tracking-tight">Articles</h1>
+
+            <p class="mt-4 max-w-2xl text-lg leading-relaxed">
+                Technical articles about software engineering, test automation
+                and architecture decisions.
+            </p>
+
+            {
+                tags.length > 0 && (
+                    <section class="mb-12">
+                        <h2 class="mb-4 text-sm font-semibold uppercase tracking-wider">
+                            Topics
+                        </h2>
+
+                        <TagList tags={tags} />
+                    </section>
+                )
+            }
+        </header>
+
+        <div class="space-y-8">
+            {articles.map((article) => <ArticleCard article={article} />)}
+        </div>
+    </main>
+</BaseLayout>

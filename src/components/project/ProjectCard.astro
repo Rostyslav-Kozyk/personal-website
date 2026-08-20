@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+    project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+---
+
+<article
+    class="rounded-xl border border-border-default bg-surface p-6 transition-colors hover:bg-surface-hover"
+>
+    <div class="flex flex-wrap gap-2">
+        {
+            project.data.technologies.map((technology) => (
+                <span class="rounded-md border border-border-default px-2 py-1 text-xs font-medium">
+                    {technology}
+                </span>
+            ))
+        }
+    </div>
+
+    <h2 class="mt-5 text-2xl font-semibold tracking-tight">
+        <a href={`/projects/${project.id}`} class="hover:underline">
+            {project.data.title}
+        </a>
+    </h2>
+
+    <p class="mt-3 leading-relaxed">
+        {project.data.description}
+    </p>
+
+    <div class="mt-6 flex items-center gap-5">
+        <a
+            href={`/projects/${project.id}`}
+            class="text-sm font-semibold hover:underline"
+        >
+            View project
+        </a>
+
+        <a
+            href={project.data.github}
+            target="_blank"
+            rel="noreferrer"
+            class="text-sm font-medium hover:underline"
+        >
+            GitHub
+        </a>
+    </div>
+</article>

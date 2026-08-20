@@ -1,0 +1,121 @@
+---
+title: "Test Automation Framework"
+description: "A Java-based framework for UI and API test automation."
+
+technologies:
+  - Java
+  - Selenium
+  - REST Assured
+  - TestNG
+  - Maven
+  - Allure
+
+github: "https://github.com/Rostyslav-Kozyk/test-automation-framework"
+
+status: "active"
+
+featured: true
+
+createdAt: 2026-08-13
+---
+
+This project demonstrates how I structure UI and API test automation in a maintainable and extensible way.
+
+## Goals
+
+The main goals of this project are:
+
+- separation of test logic and implementation details
+- reusable UI components
+- reusable API clients
+- readable test scenarios
+- centralized assertions
+- useful test reporting
+
+## Technology Stack
+
+The framework uses Java as its main programming language.
+
+For UI automation, it uses Selenium WebDriver.
+
+For API automation, it uses REST Assured.
+
+Test execution is managed with TestNG and Maven.
+
+Allure is used for test reporting.
+
+## Architecture
+
+The project separates UI and API automation into dedicated layers.
+
+This makes it possible to evolve the two areas independently while still sharing common infrastructure.
+
+The architecture focuses on clear responsibilities between tests, page objects, API clients, models, assertions, and configuration.
+
+## How to Run
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Rostyslav-Kozyk/test-automation-framework.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd test-automation-framework
+```
+
+Run the tests:
+
+```bash
+mvn clean test
+```
+
+## UI Test Automation
+
+The UI automation part of the framework uses Selenium WebDriver.
+
+Page-specific browser interactions are separated from test scenarios using the Page Object Model.
+
+This allows test cases to focus on behavior instead of low-level browser interaction details.
+
+## API Test Automation
+
+The API automation part uses REST Assured.
+
+API communication is encapsulated in dedicated client classes so that test scenarios do not have to construct HTTP requests directly.
+
+DTOs are used to represent request and response data.
+
+## Assertions
+
+Assertions are separated from test execution logic where appropriate.
+
+This helps keep tests readable and makes validation logic reusable.
+
+## Reporting
+
+The framework uses Allure for test reporting.
+
+The goal is not only to determine whether a test passed or failed, but also to provide useful information for investigating failures.
+
+## What I Want to Explain
+
+In future articles I will describe the architectural decisions behind this framework, including:
+
+- why I use the Page Object Model
+- WebDriver management
+- API client abstraction
+- DTO usage in API tests
+- separating assertions from test logic
+- test reporting with Allure
+- configuration management
+- CI/CD integration
+- trade-offs of the current architecture
+
+## Repository
+
+The complete source code is available on GitHub:
+
+[View Test Automation Framework on GitHub](https://github.com/Rostyslav-Kozyk/test-automation-framework)

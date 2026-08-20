@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/project/ProjectCard.astro";
+
+import { getProjects } from "../../utils/content";
+
+const projects = await getProjects();
+---
+
+<BaseLayout
+    title="Projects | Rostyslav Kozyk"
+    description="Software engineering and test automation projects."
+>
+    <main class="mx-auto max-w-5xl px-6 py-16 sm:py-20">
+        <header class="mb-12">
+            <p class="mb-3 text-sm font-semibold uppercase tracking-wider">
+                Engineering
+            </p>
+
+            <h1 class="text-4xl font-bold tracking-tight">Projects</h1>
+
+            <p class="mt-4 max-w-2xl text-lg leading-relaxed">
+                Software engineering projects with documentation about
+                architecture, technologies and implementation decisions.
+            </p>
+        </header>
+
+        <div class="grid gap-6">
+            {projects.map((project) => <ProjectCard project={project} />)}
+        </div>
+    </main>
+</BaseLayout>

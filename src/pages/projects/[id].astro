@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import { getCollection, render } from "astro:content";
+
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import RelatedArticles from "../../components/project/RelatedArticles.astro";
+
+import { getRelatedArticles } from "../../utils/content";
+
+export async function getStaticPaths() {
+    const projects = await getCollection("projects");
+
+    return projects.map((project) => ({
+        params: {
+            id: project.id,
+        },
+
+        props: {
+            project,
+        },
+    }));
+}
+
+interface Props {
+    project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+
+const { Content } = await render(project);
+
+const relatedArticles = await getRelatedArticles(project.id);
+---
+
+<ProjectLayout project={project}>
+    <Content />
+
+    <RelatedArticles slot="after-content" articles={relatedArticles} />
+</ProjectLayout>

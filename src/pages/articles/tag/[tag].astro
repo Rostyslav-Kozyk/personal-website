@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ArticleCard from "../../../components/article/ArticleCard.astro";
+
+import {
+    getArticlesByTag,
+    getTags,
+    normalizeTag,
+} from "../../../utils/content";
+
+export async function getStaticPaths() {
+    const tags = await getTags();
+
+    return tags.map((tag) => ({
+        params: {
+            tag: normalizeTag(tag),
+        },
+
+        props: {
+            tag,
+        },
+    }));
+}
+
+interface Props {
+    tag: string;
+}
+
+const { tag } = Astro.props;
+
+const articles = await getArticlesByTag(normalizeTag(tag));
+---
+
+<BaseLayout
+    title={`${tag} Articles | Rostyslav Kozyk`}
+    description={`Technical articles tagged with ${tag}.`}
+>
+    <main class="mx-auto max-w-5xl px-6 py-16 sm:py-20">
+        <header class="mb-12">
+            <a href="/articles" class="text-sm font-medium hover:underline">
+                ← All articles
+            </a>
+
+            <p class="mt-8 text-sm font-semibold uppercase tracking-wider">
+                Topic
+            </p>
+
+            <h1 class="mt-2 text-4xl font-bold tracking-tight">
+                {tag}
+            </h1>
+
+            <p class="mt-4 text-lg">
+                {articles.length}
+                {articles.length === 1 ? " article" : " articles"}
+            </p>
+        </header>
+
+        <div class="space-y-8">
+            {articles.map((article) => <ArticleCard article={article} />)}
+        </div>
+    </main>
+</BaseLayout>

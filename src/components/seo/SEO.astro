@@ -1,0 +1,46 @@
+---
+interface Props {
+    title: string;
+    description: string;
+    image?: string;
+    type?: "website" | "article";
+}
+
+const { title, description, image, type = "website" } = Astro.props;
+
+const canonicalURL = new URL(
+    Astro.url.pathname,
+    Astro.site ?? Astro.url.origin,
+);
+
+const imageURL = image
+    ? new URL(image, Astro.site ?? Astro.url.origin)
+    : undefined;
+---
+
+<title>{title}</title>
+
+<meta name="description" content={description} />
+
+<link rel="canonical" href={canonicalURL} />
+
+<meta property="og:type" content={type} />
+
+<meta property="og:title" content={title} />
+
+<meta property="og:description" content={description} />
+
+<meta property="og:url" content={canonicalURL} />
+
+{imageURL && <meta property="og:image" content={imageURL} />}
+
+<meta
+    name="twitter:card"
+    content={imageURL ? "summary_large_image" : "summary"}
+/>
+
+<meta name="twitter:title" content={title} />
+
+<meta name="twitter:description" content={description} />
+
+{imageURL && <meta name="twitter:image" content={imageURL} />}

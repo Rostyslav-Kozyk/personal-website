@@ -1,0 +1,62 @@
+---
+title: "Why I Separate API Clients from Test Logic"
+description: "How API client abstractions help keep REST Assured test scenarios focused and maintainable."
+
+publishedAt: 2026-08-17
+
+tags:
+  - REST Assured
+  - Java
+  - API Testing
+  - Architecture
+
+draft: false
+
+project: test-automation-framework
+---
+
+API tests can become difficult to read when HTTP request construction,
+headers, endpoints and serialization logic are placed directly inside
+test methods.
+
+## The Problem
+
+A test should primarily describe the scenario that is being verified.
+
+When REST Assured implementation details are mixed with business-level
+test steps, the intent of the test becomes harder to understand.
+
+## API Client Abstraction
+
+In my test automation framework, API communication is encapsulated in
+dedicated client classes.
+
+Instead of constructing requests directly inside every test, test
+scenarios interact with a higher-level API client.
+
+## Benefits
+
+This approach provides several advantages:
+
+- reusable request configuration
+- centralized endpoint handling
+- less duplication
+- simpler test scenarios
+- easier maintenance
+- clearer separation of responsibilities
+
+## Trade-offs
+
+Every abstraction introduces additional code.
+
+For very small test suites, a dedicated client layer may be unnecessary.
+
+As the API test suite grows, however, keeping HTTP implementation details
+outside the tests can significantly improve maintainability.
+
+## Conclusion
+
+The goal of an API client layer is not to hide REST Assured completely.
+
+Its purpose is to keep test scenarios focused on behavior while moving
+technical HTTP details into a dedicated responsibility.

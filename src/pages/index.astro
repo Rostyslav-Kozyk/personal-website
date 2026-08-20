@@ -1,17 +1,28 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 
+import Hero from "../components/home/Hero.astro";
+import FeaturedProject from "../components/home/FeaturedProject.astro";
+import LatestArticles from "../components/home/LatestArticles.astro";
+import AboutPreview from "../components/home/AboutPreview.astro";
+
+import { getFeaturedProject, getLatestArticles } from "../utils/content";
+
+const featuredProject = await getFeaturedProject();
+const latestArticles = await getLatestArticles(3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+	title="Rostyslav Kozyk | Software Engineer"
+	description="Software engineering projects, architecture decisions and technical articles."
+>
+	<main class="mx-auto max-w-5xl px-6">
+		<Hero />
+
+		{featuredProject && <FeaturedProject project={featuredProject} />}
+
+		<LatestArticles articles={latestArticles} />
+
+		<AboutPreview />
+	</main>
+</BaseLayout>

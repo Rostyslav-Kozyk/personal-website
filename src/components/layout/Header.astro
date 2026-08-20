@@ -1,0 +1,30 @@
+---
+import Navigation from "./Navigation.astro";
+import MobileNavigation from "./MobileNavigation.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+---
+
+<header class="relative border-b border-border-default">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+        <a href="/" class="text-lg font-bold tracking-tight">
+            Rostyslav Kozyk
+        </a>
+
+        <div class="flex items-center gap-4">
+            <Navigation />
+
+            <a
+                href="https://github.com/Rostyslav-Kozyk"
+                target="_blank"
+                rel="noreferrer"
+                class="hidden text-sm font-medium text-text-secondary transition-colors hover:text-text-primary sm:block"
+            >
+                GitHub
+            </a>
+
+            <ThemeToggle />
+
+            <MobileNavigation />
+        </div>
+    </div>
+</header>

@@ -1,0 +1,48 @@
+<script>
+    function enhanceCodeBlocks() {
+        const codeBlocks = document.querySelectorAll<HTMLElement>(
+            ".prose pre.astro-code",
+        );
+
+        codeBlocks.forEach((block) => {
+            if (block.parentElement?.classList.contains("code-block-wrapper")) {
+                return;
+            }
+
+            const wrapper = document.createElement("div");
+
+            wrapper.className = "code-block-wrapper";
+
+            block.parentNode?.insertBefore(wrapper, block);
+
+            wrapper.appendChild(block);
+
+            const button = document.createElement("button");
+
+            button.type = "button";
+            button.className = "copy-code-button";
+            button.textContent = "Copy";
+            button.setAttribute("aria-label", "Copy code to clipboard");
+
+            wrapper.appendChild(button);
+
+            button.addEventListener("click", async () => {
+                const code = block.querySelector("code");
+
+                if (!code) {
+                    return;
+                }
+
+                await navigator.clipboard.writeText(code.textContent ?? "");
+
+                button.textContent = "Copied";
+
+                window.setTimeout(() => {
+                    button.textContent = "Copy";
+                }, 1500);
+            });
+        });
+    }
+
+    enhanceCodeBlocks();
+</script>

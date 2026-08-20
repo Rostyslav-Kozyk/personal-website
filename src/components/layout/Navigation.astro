@@ -1,0 +1,43 @@
+---
+const pathname = Astro.url.pathname;
+
+const navigationItems = [
+    {
+        label: "Projects",
+        href: "/projects",
+    },
+    {
+        label: "Articles",
+        href: "/articles",
+    },
+    {
+        label: "About",
+        href: "/about",
+    },
+];
+
+const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
+---
+
+<nav aria-label="Main navigation" class="hidden sm:block">
+    <ul class="flex items-center gap-6">
+        {
+            navigationItems.map((item) => (
+                <li>
+                    <a
+                        href={item.href}
+                        class:list={[
+                            "text-sm transition-colors hover:opacity-70",
+                            {
+                                "font-semibold": isActive(item.href),
+                            },
+                        ]}
+                    >
+                        {item.label}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</nav>
