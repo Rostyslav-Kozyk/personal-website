@@ -4,7 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  site: "https://DEINE-SEITE.pages.dev",
+  site: "https://rostyslav-kozyk-personal-website.rostyk-niko3000.workers.dev/",
 
   integrations: [mdx(), sitemap()],
 
