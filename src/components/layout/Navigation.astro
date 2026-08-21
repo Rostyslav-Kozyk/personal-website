@@ -27,6 +27,7 @@ const isActive = (href: string) =>
                 <li>
                     <a
                         href={item.href}
+                        aria-current={isActive(item.href) ? "page" : undefined}
                         class:list={[
                             "text-sm transition-colors hover:opacity-70",
                             {

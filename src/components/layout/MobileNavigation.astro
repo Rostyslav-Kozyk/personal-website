@@ -52,6 +52,9 @@ const isActive = (href: string) =>
                         <li>
                             <a
                                 href={item.href}
+                                aria-current={
+                                    isActive(item.href) ? "page" : undefined
+                                }
                                 class:list={[
                                     "block text-base text-text-secondary hover:text-text-primary",
                                     {
@@ -88,11 +91,27 @@ const isActive = (href: string) =>
 
     const menu = document.querySelector<HTMLElement>("#mobile-menu");
 
+    function closeMenu() {
+        button?.setAttribute("aria-expanded", "false");
+
+        menu?.classList.add("hidden");
+    }
+
     button?.addEventListener("click", () => {
         const open = button.getAttribute("aria-expanded") === "true";
 
         button.setAttribute("aria-expanded", String(!open));
 
         menu?.classList.toggle("hidden", open);
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeMenu();
+        }
+    });
+
+    menu?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
     });
 </script>

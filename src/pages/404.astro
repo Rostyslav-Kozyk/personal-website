@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="Page not found | Rostyslav Kozyk"
+    description="The requested page could not be found."
+>
+    <main id="main-content" class="mx-auto max-w-3xl px-6 py-24 text-center">
+        <p
+            class="text-sm font-semibold uppercase tracking-wider text-text-muted"
+        >
+            404
+        </p>
+
+        <h1 class="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
+            Page not found
+        </h1>
+
+        <p class="mx-auto mt-5 max-w-xl text-lg text-text-secondary">
+            The page you are looking for does not exist or may have been moved.
+        </p>
+
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+            <a
+                href="/"
+                class="rounded-lg border border-border-default px-5 py-3 font-semibold transition-colors hover:bg-surface-hover"
+            >
+                Go home
+            </a>
+
+            <a
+                href="/projects"
+                class="rounded-lg border border-border-default px-5 py-3 font-semibold transition-colors hover:bg-surface-hover"
+            >
+                View projects
+            </a>
+        </div>
+    </main>
+</BaseLayout>

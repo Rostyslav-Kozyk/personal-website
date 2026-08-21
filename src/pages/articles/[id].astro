@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
-import { getCollection, getEntry, render } from "astro:content";
+import { getEntry, render } from "astro:content";
 
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import ProjectReference from "../../components/article/ProjectReference.astro";
@@ -9,10 +9,13 @@ import TableOfContents from "../../components/article/TableOfContents.astro";
 import ArticleNavigation from "../../components/article/ArticleNavigation.astro";
 
 import { calculateReadingTime } from "../../utils/readingTime";
-import { getArticleNavigation } from "../../utils/content";
+import {
+    getPublishedArticles,
+    getArticleNavigation,
+} from "../../utils/content";
 
 export async function getStaticPaths() {
-    const articles = await getCollection("articles", ({ data }) => !data.draft);
+    const articles = await getPublishedArticles();
 
     return articles.map((article) => ({
         params: {
